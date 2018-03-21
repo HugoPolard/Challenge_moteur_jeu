@@ -17,4 +17,8 @@ int main() {
 		//on est la ah oui
 	}
 	printf("Debut de la partie\n");
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> master
