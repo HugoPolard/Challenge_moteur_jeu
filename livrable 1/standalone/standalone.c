@@ -14,11 +14,7 @@ int main() {
 		scanf("%d", &pos_origine);
 		printf("--position d'arrivée : \n");
 		scanf("%d", &pos_arrivee);
-		//on est la ah oui
+		//ah ouais ouais ouais
 	}
 	printf("Debut de la partie\n");
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
