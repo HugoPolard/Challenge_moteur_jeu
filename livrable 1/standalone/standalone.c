@@ -17,4 +17,8 @@ int main() {
 		//ah ouais ouais ouais
 	}
 	printf("Debut de la partie\n");
+<<<<<<< HEAD:standalone.c
 }
+=======
+}
+>>>>>>> Alexandre:livrable 1/standalone/standalone.c
