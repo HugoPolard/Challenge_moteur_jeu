@@ -16,4 +16,8 @@ int main() {
 		scanf("%d", &pos_arrivee);
 	}
 	printf("Debut de la partie\n");
+<<<<<<< HEAD:standalone.c
 }
+=======
+}
+>>>>>>> Alexandre:livrable 1/standalone/standalone.c
