@@ -16,4 +16,5 @@ int main() {
 		scanf("%d", &pos_arrivee);
 		
 	}
+	printf("Debut de la partie\n");
 }
