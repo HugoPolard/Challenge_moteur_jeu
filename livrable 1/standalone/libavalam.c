@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "avalam.h"
 
+/* Demander l'utilisation exacte de 'extern' dans ce cas */
 extern T_Voisins topologie[NBCASES]; 
 T_Position positionInitiale; 
 
