@@ -1,3 +1,4 @@
+// Ce fichier correspond à la déclaration des variables de jeu pour setup la configuration initiale
 T_Voisins topologie[NBCASES] = 
 {
   {4,{1,2,3,4}}, // 0 

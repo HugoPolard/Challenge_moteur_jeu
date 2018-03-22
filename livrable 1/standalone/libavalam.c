@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "avalam.h"
 
-extern T_Voisins topologie[NBCASES]; 
+extern T_Voisins topologie[NBCASES];
 T_Position positionInitiale; 
 
 //#define __DEBUG__
@@ -17,7 +17,7 @@ T_Position positionInitiale;
 #endif
 
 
-octet nbVoisins(octet numCase) {
+octet nbVoisins(octet numCase) {	
 	// renvoie le nombre de voisins d'une case
 	return topologie[numCase].nb; 
 }
