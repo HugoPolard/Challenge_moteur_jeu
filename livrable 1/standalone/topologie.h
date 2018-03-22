@@ -1,5 +1,7 @@
 T_Voisins topologie[NBCASES] = 
 {
+//topologie représente la position initile du plateau de jeu.
+//première accolade = nombre de voisin, deuxième accolade = cases des voisins, commentaire = case de référence du pion.
   {4,{1,2,3,4}}, // 0 
   {4,{0,3,4,5}}, // 1 
   {4,{0,3,6,7}}, // 2 
