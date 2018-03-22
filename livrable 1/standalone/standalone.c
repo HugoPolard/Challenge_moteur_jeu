@@ -17,4 +17,8 @@ int main() {
 		//ah ouais ouais ouais
 	}
 	printf("Debut de la partie\n");
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 02a44695935c35dc4b8a1b7bfd07e1bef8e584ec
