@@ -1,4 +1,5 @@
 libavalam.c : 4: pourquoi on ne met pas le fichier .h
 libavalam: 20: octet est un type ?
+Pourquoi printf1, 2 et 3
 
 premier nombre : nombre de voisins, ensuite les indices des cases voisinnes et en commentaire la case concernée (indice du tableau)

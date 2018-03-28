@@ -1,6 +1,11 @@
 #include <stdio.h>
+#include <string.h>
 #include "avalam.h"
 #include "topologie.h"
+/* ***** A Faire
+	reconnaitre la fin de partie et afficher le score
+	paramétrer le nom du data.json
+*/
 
 void writePos(char * filename, T_Position p) ; 
 
@@ -10,9 +15,8 @@ int main(int argc, char ** argv){
 
 	T_Position p = getPositionInitiale();
 	//afficherPosition(p);
-	writePos("data.json", p);
 	
-	T_ListeCoups l = getCoupsLegaux(p);
+	T_ListeCoups l = getCoupsLegaux(p); //liste des coups legaux
 	//afficherListeCoups(l);
 
 	while(l.nb > 0) {
@@ -26,18 +30,18 @@ int main(int argc, char ** argv){
 		printf("On joue %d -> %d\n", numCase, numCaseD); 
 		p = jouerCoup(p, numCase,numCaseD); 
 		//afficherPosition(p);
-		writePos("data.json", p);
-
+		if(argc == 1)
+			writePos("../../avalam-web/data.json", p);
+		else
+			writePos(argv[1], p);
 		s = evaluerScore(p); 
 		afficherScore(s);
 
 		l = getCoupsLegaux(p);
 		//afficherListeCoups(l);
-}
+	}
 
 }
-
-
 
 void writePos(char * filename, T_Position p) {
 	FILE * fp; 
