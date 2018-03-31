@@ -10,7 +10,9 @@
 void writePos(char * filename, T_Position p) ; 
 
 int main(int argc, char ** argv){
-	int numCase, numCaseD; 
+	int numCase, numCaseD;
+	char nom_fichier[50]= "../../avalam-web/", temp[50]; // chaines pour le nom de fichier, temp pour le nom du fichier sans aller dans avalam-web et nom-fichier prend d'abord le chemin d'avalam-web puis le chemin total
+	int i = 0; //compteur pour savoir si on est au premier tour ou non
 	T_Score s ; 
 
 	T_Position p = getPositionInitiale();
@@ -30,15 +32,26 @@ int main(int argc, char ** argv){
 		printf("On joue %d -> %d\n", numCase, numCaseD); 
 		p = jouerCoup(p, numCase,numCaseD); 
 		//afficherPosition(p);
-		if(argc == 1)
-			writePos("../../avalam-web/data.json", p);
-		else
-			writePos(argv[1], p);
+
+		if(i == 0) {
+			if(argc == 1) {
+				strcpy(nom_fichier, "../../avalam-web/data.json");
+			}
+			else {
+				strcpy(temp, argv[1]);
+				if(!strstr(temp, ".json")) strcat(temp, ".json"); // on vérifie que le nom du fichier est comme il faut
+				strcat(nom_fichier, temp);	
+				
+			}
+		}
+		writePos(nom_fichier, p);		
+			
 		s = evaluerScore(p); 
 		afficherScore(s);
 
 		l = getCoupsLegaux(p);
 		//afficherListeCoups(l);
+		i++;
 	}
 
 }
