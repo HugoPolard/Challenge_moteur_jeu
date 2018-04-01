@@ -1,3 +1,3 @@
 all: 
-	gcc -c standalone.c
-	gcc standalone.c -o standalone.exe
+	gcc -c main.c
+	gcc main.o libavalam.a -o standalone.exe

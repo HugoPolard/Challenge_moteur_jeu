@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "avalam.h"
 #include "topologie.h"
 
@@ -10,7 +11,8 @@ int main(int argc, char ** argv){
 
 	T_Position p = getPositionInitiale();
 	//afficherPosition(p);
-	writePos("data.json", p);
+
+
 	
 	T_ListeCoups l = getCoupsLegaux(p);
 	//afficherListeCoups(l);
@@ -26,7 +28,9 @@ int main(int argc, char ** argv){
 		printf("On joue %d -> %d\n", numCase, numCaseD); 
 		p = jouerCoup(p, numCase,numCaseD); 
 		//afficherPosition(p);
-		writePos("data.json", p);
+		if(argc == 1){
+			writePos("../../lib-avalam/data.json",p);
+		}else writePos(argv[1], p);
 
 		s = evaluerScore(p); 
 		afficherScore(s);
