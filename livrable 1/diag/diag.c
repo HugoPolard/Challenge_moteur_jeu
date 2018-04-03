@@ -5,7 +5,7 @@ int main (/*char * FEN, T_position position*/){
 	//par convention on met le trait en premier et les positions après
 	//il reste a integrer le trait dans position et mettre dans la bonne forme les chiffres (voir poly cours)
 	//pour le moment on défini FEN et position mais ils seront en paramètres plus tard
-	int i;
+	int i, j;
 	int ctoi, ctoi2, ctoidiz;
 	char FEN[50];
 	char trait;
@@ -29,15 +29,18 @@ int main (/*char * FEN, T_position position*/){
 			ctoi2 = FEN[i+1];
 			if(ctoi2 > 47 && ctoi2 < 58){
 			//si c'est un nombre
-			//de cette forme :
-			//{'nb':1, 'couleur':0},
 				ctoidiz = FEN[i] + FEN[i+1] - 87;
 				printf("%d \n", ctoidiz);
-				
+				for(j=1; j<=ctoidiz; j++){
+					strcat(position, "{'nb':1, 'couleur':0},\n");
+				}
 				i++;
 			}else{
-				ctoi -= 48; 
+				ctoi -= 48;
 				printf("%d \n", ctoi);
+				for(j=1; j<=ctoi; j++){
+					strcat(position, "{'nb':1, 'couleur':0},\n");
+				}
 			}
 		}else{
 			switch(ctoi){
