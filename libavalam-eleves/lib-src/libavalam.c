@@ -61,11 +61,12 @@ T_ListeCoups getCoupsLegaux(T_Position p) {
 	
 	for(cO=0;cO<NBCASES;cO++) {
 		printf1("case %d\n",cO); 
-		if (p.cols[cO].nb == VIDE ) { printf0("vide!\n"); continue;}
+		if (p.cols[cO].nb == VIDE ) {printf0("vide!\n"); continue;}
 		v = getVoisins(cO); 
 		for(iV=0;iV<v.nb;iV++) {
 			cD = v.cases[iV]; 
 			printf2("voisin %d : case %d\n",iV, cD);
+			if (p.cols[cD].nb == VIDE ) {printf0("vide!\n"); continue;} // ajout par tomnab 21/03/2018
 			if (p.cols[cO].nb + p.cols[cD].nb <= 5) {
 				printf0("possible !\n");
 				addCoup(&l, cO,cD); 
