@@ -67,3 +67,9 @@ T_Position jouerCoup(T_Position p, octet origine, octet destination) ;
 T_ListeCoups getCoupsLegaux(T_Position p) ; 
 T_Score evaluerScore(T_Position p);
 void afficherScore(T_Score s); 
+
+
+void viderBuffer();
+void crea_fichier(char * filename, T_Position *p, int num_diag, char* description) ;
+void forme_desc(char* description);
+void interpretation(char *,T_Position *position);

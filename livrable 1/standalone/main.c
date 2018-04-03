@@ -17,11 +17,6 @@ int main(int argc, char ** argv){
 
 	T_Position p = getPositionInitiale();
 	//afficherPosition(p);
-<<<<<<< HEAD:livrable 1/standalone/main.c
-=======
-
-
->>>>>>> Julien:livrable 1/standalone/main.c
 	
 	T_ListeCoups l = getCoupsLegaux(p); //liste des coups legaux
 	//afficherListeCoups(l);
