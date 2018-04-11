@@ -1,169 +1,249 @@
 <head>
 
-<style>
-	#avalam{
-		width:900px;
-		height:750px;
-		margin:auto;
-		position:relative;
-	}
+    <style>
+        #avalam {
+            width: 900px;
+            height: 750px;
+            margin: auto;
+            position: relative;
+        }
 
-	#palette {display:none;}
-	.rouge, .jaune {position:absolute;z-index:10; }
-	.indice {position:absolute;top:50px;left:65px;}
-	.nombre {position:absolute;top:22px;left:28px;
-		font-family:courier;font-weight:bold;font-size:18pt;}	
-	.rouge img, .jaune img {width:70px;height:70px;}
-</style>
+        #palette {
+            display: none;
+        }
 
-<script src="jquery.js"></script>
-<script src="avalam.json"></script>
+        .rouge, .jaune {
+            position: absolute;
+            z-index: 10;
+        }
 
-<script>
- 
-var position = [];
-var modeDeplacement = false;
-var indiceDepart=false; 
-var colDepart=false;  
+        .indice {
+            position: absolute;
+            top: 50px;
+            left: 65px;
+        }
 
+        .nombre {
+            position: absolute;
+            top: 22px;
+            left: 28px;
+            font-family: courier sans-serif;
+            font-weight: bold;
+            font-size: 18pt;
+        }
 
-$(document).ready(function(){
-	var jaune = $(".jaune"); 
-	var rouge = $(".rouge"); 
-	var n; 
+        .rouge img, .jaune img {
+            width: 70px;
+            height: 70px;
+        }
+    </style>
 
-	$(".col").click(function(){
-		var indice = $(this).data("indice");
-		console.log("couleur:" + position[indice].col + " nombre:" + position[indice].n);
+    <script src="jquery.js"></script>
+    <script src="avalam.json"></script>
 
-		if (!modeDeplacement) { // debut deplacement 
-			console.log("debut deplacement");
-			modeDeplacement = true; 
-			indiceDepart = indice;
-			colDepart = $(this);
-			$(this).data({"deplacement":true});
-			return; 
-		} // FIN:debut déplacement
-		else { // fin déplacement 
-			if (indice == indiceDepart){
-				// annulation
-				colDepart.data({"deplacement":false});
-				console.log("annulation");
-				modeDeplacement = false;
-				$(".col").mouseout();
-				return; 
-			}
-			else { // validation
-				console.log("fin de deplacement de " + indiceDepart + " vers " + indice);
-				// depart: combien, col ? 
-				console.log("depart: n=" + position[indiceDepart].n + "col=" + position[indiceDepart].col);
-				// arrivee : combien, col ? 
-				console.log("arrivee: n=" + position[indice].n + "col=" + position[indice].col);
+    <script>
 
-				// Vérification légal (nb) ?
-				if (position[indiceDepart].n + position[indice].n > 5) {
-					console.log("interdiction (nb) ! ");
-					colDepart.data({"deplacement":false});
-					modeDeplacement = false;
-					$(".col").mouseout();
-					return; 
-				}
-
-				// Vérification légal (adj) ?
-				if (topo[indiceDepart].adj.indexOf(indice) == -1) {
-					console.log("interdiction (adj) ! ");
-					colDepart.data({"deplacement":false});
-					modeDeplacement = false;
-					$(".col").mouseout();
-					return; 
-				}
-
-				// suppression col. depart 
-				//colDepart.hide("slow");
-				//colDepart.offset({left:$(this).data("left"), top:$(this).data("top")});
-				//colDepart.show("slow");
-
-				colDepart.remove();
-
-				// suppression col arrivee - remplacement par pile de départ ! 
-				$(this).removeClass("jaune").removeClass("rouge");  
-				if (position[indiceDepart].col == "j") {
-					$(this).addClass("jaune"); 
-					$("img",$(this)).attr("src","jaune.png");
-					position[indice].col = "j";
-				} else {
-					$(this).addClass("rouge");
-					$("img",$(this)).attr("src","rouge.png");
-					position[indice].col = "r";
-				}
-					
-				$(".indice",$(this)).html(indice);
-			
-				position[indice].n = position[indiceDepart].n + position[indice].n;
-				position[indiceDepart].col = false;
-				position[indiceDepart].n = 0;
-				
-				$(".nombre",$(this)).html(position[indice].n);
-
-				console.log(JSON.stringify(position));
-
-				modeDeplacement = false;
-				$(".col").mouseout();
-
-			}	//FIN:validation			
-		} // FIN:fin deplacement
-	});
+        var position = [];
+        var modeDeplacement = false;
+        var indiceDepart = false;
+        var colDepart = false;
+        index = "";
 
 
-	$(document).on("mouseover",".jaune",function() {
-		if (position[$(this).data("indice")].n == 5) return; 
-		if (!modeDeplacement)
-			$("img",$(this)).attr("src","jaune2.png");
-		else if (topo[indiceDepart].adj.indexOf($(this).data("indice")) != -1)
-			$("img",$(this)).attr("src","jaune2.png");
-	});
-	$(document).on("mouseover",".rouge",function() {
-		if (position[$(this).data("indice")].n == 5) return;
-		if (!modeDeplacement)
-			$("img",$(this)).attr("src","rouge2.png");
-		else if (topo[indiceDepart].adj.indexOf($(this).data("indice")) != -1)
-			$("img",$(this)).attr("src","rouge2.png");
-	});
-	$(document).on("mouseout",".jaune",function() {
-		// on désactive ceux que l'on veut SAUF celui qui est en cours de déplacement 
-		if ((!modeDeplacement) || (indiceDepart != $(this).data("indice")))
-			$("img",$(this)).attr("src","jaune.png");
-	});
-	$(document).on("mouseout",".rouge",function() {
-		if ((!modeDeplacement) || (indiceDepart != $(this).data("indice")))
-			$("img",$(this)).attr("src","rouge.png");
-	});
+        $(document).ready(function () {
+            var jaune = $(".jaune");
+            var rouge = $(".rouge");
+            var n;
+
+            $(".col").click(function () {
+                var indice = $(this).data("indice");
+                console.log("couleur:" + position[indice].col + " nombre:" + position[indice].n);
+
+                if (!modeDeplacement) { // debut deplacement
+                    console.log("debut deplacement");
+                    modeDeplacement = true;
+                    indiceDepart = indice;
+                    colDepart = $(this);
+                    $(this).data({"deplacement": true});
+                    return;
+                } // FIN:debut déplacement
+                else { // fin déplacement
+                    if (indice === indiceDepart) {
+                        // annulation
+                        colDepart.data({"deplacement": false});
+                        console.log("annulation");
+                        modeDeplacement = false;
+                        $(".col").mouseout();
+                        return;
+                    }
+                    else { // validation
+                        console.log("fin de deplacement de " + indiceDepart + " vers " + indice);
+                        // depart: combien, col ?
+                        console.log("depart: n=" + position[indiceDepart].n + "col=" + position[indiceDepart].col);
+                        // arrivee : combien, col ?
+                        console.log("arrivee: n=" + position[indice].n + "col=" + position[indice].col);
+
+                        // Vérification légal (nb) ?
+                        if (position[indiceDepart].n + position[indice].n > 5) {
+                            console.log("interdiction (nb) ! ");
+                            colDepart.data({"deplacement": false});
+                            modeDeplacement = false;
+                            $(".col").mouseout();
+                            return;
+                        }
+
+                        // Vérification légal (adj) ?
+                        if (topo[indiceDepart].adj.indexOf(indice) === -1) {
+                            console.log("interdiction (adj) ! ");
+                            colDepart.data({"deplacement": false});
+                            modeDeplacement = false;
+                            $(".col").mouseout();
+                            return;
+                        }
+
+                        // suppression col. depart
+                        //colDepart.hide("slow");
+                        //colDepart.offset({left:$(this).data("left"), top:$(this).data("top")});
+                        //colDepart.show("slow");
+
+                        colDepart.remove();
+
+                        // suppression col arrivee - remplacement par pile de départ !
+                        $(this).removeClass("jaune").removeClass("rouge");
+                        if (position[indiceDepart].col === "j") {
+                            $(this).addClass("jaune");
+                            $("img", $(this)).attr("src", "jaune.png");
+                            position[indice].col = "j";
+                        } else {
+                            $(this).addClass("rouge");
+                            $("img", $(this)).attr("src", "rouge.png");
+                            position[indice].col = "r";
+                        }
+
+                        $(".indice", $(this)).html(indice);
+
+                        position[indice].n = position[indiceDepart].n + position[indice].n;
+                        position[indiceDepart].col = false;
+                        position[indiceDepart].n = 0;
+
+                        $(".nombre", $(this)).html(position[indice].n);
+
+                        createJson(position);
+
+                        modeDeplacement = false;
+                        $(".col").mouseout();
+
+                    }	//FIN:validation
+                } // FIN:fin deplacement
+            });
+
+            function createJson(json) { /* Créer le code FEN */
+                index = "";
+                /* Variable globale qui contiendra le FEN (globale car utilisée par les checkFen) */
+                var cpt = 1;
+                /*Compte les cases vides qui se suivent */
+                for (var i = 0; i < json.length; i++) {
+                    if (json[i].col === "j") { /*Si la case courante a un sommet jaune on modifie le FEN en conséquence */
+                        checkFenJ(json[i].n);
+                    } else if (json[i].col === "r") {/*Si la case courante a un sommet rouge on modifie le FEN en conséquence */
+                        checkFenR(json[i].n);
+                    } else if (json[i].n === 0) {/*Si la case est vide on remplace par un 0 */
+                        index += 0;
+                    }
+                }
+                $("#fen").empty(); // on vide le div
+                $("#fen").append("FEN : " + index);
+            }
+
+            function checkFenJ(value) {
+                switch (value) {
+                    case 1:
+                        index += "u";
+                        break;
+                    case 2:
+                        index += "d";
+                        break;
+                    case 3:
+                        index += "t";
+                        break;
+                    case 4:
+                        index += "q";
+                        break;
+                    case 5:
+                        index += "c";
+                        break;
+                }
+            }
+
+            function checkFenR(value) {
+                switch (value) {
+                    case 1:
+                        index += "U";
+                        break;
+                    case 2:
+                        index += "D";
+                        break;
+                    case 3:
+                        index += "T";
+                        break;
+                    case 4:
+                        index += "Q";
+                        break;
+                    case 5:
+                        index += "C";
+                        break;
+                }
+            }
+
+            $(document).on("mouseover", ".jaune", function () {
+                if (position[$(this).data("indice")].n === 5) return;
+                if (!modeDeplacement)
+                    $("img", $(this)).attr("src", "jaune2.png");
+                else if (topo[indiceDepart].adj.indexOf($(this).data("indice")) != -1)
+                    $("img", $(this)).attr("src", "jaune2.png");
+            });
+            $(document).on("mouseover", ".rouge", function () {
+                if (position[$(this).data("indice")].n === 5) return;
+                if (!modeDeplacement)
+                    $("img", $(this)).attr("src", "rouge2.png");
+                else if (topo[indiceDepart].adj.indexOf($(this).data("indice")) != -1)
+                    $("img", $(this)).attr("src", "rouge2.png");
+            });
+            $(document).on("mouseout", ".jaune", function () {
+                // on désactive ceux que l'on veut SAUF celui qui est en cours de déplacement
+                if ((!modeDeplacement) || (indiceDepart != $(this).data("indice")))
+                    $("img", $(this)).attr("src", "jaune.png");
+            });
+            $(document).on("mouseout", ".rouge", function () {
+                if ((!modeDeplacement) || (indiceDepart != $(this).data("indice")))
+                    $("img", $(this)).attr("src", "rouge.png");
+            });
 
 
-	for(i=0;i<topo.length;i++) {
-		if (topo[i].col == "r") 
-			n = rouge.clone(true);  
-		else 
-			n = jaune.clone(true);  
+            for (i = 0; i < topo.length; i++) {
+                if (topo[i].col === "r")
+                    n = rouge.clone(true);
+                else
+                    n = jaune.clone(true);
 
-		n.offset({left:(topo[i].cx-82), top:topo[i].cy-139});
-		n.append('<div class="indice">' + i + '</div>');
-		pos = n.offset();
-		n.data({indice:i, left:pos.left, top:pos.top});
-		$("#avalam").append(n);
-		position.push({n:1,col:topo[i].col }); 
-	}
+                n.offset({left: (topo[i].cx - 82), top: topo[i].cy - 139});
+                n.append('<div class="indice">' + i + '</div>');
+                pos = n.offset();
+                n.data({indice: i, left: pos.left, top: pos.top});
+                $("#avalam").append(n);
+                position.push({n: 1, col: topo[i].col});
+            }
 
-	console.log(position);
+            console.log(position);
 
-/* nb : les coordonnées sont décalées d'un vecteur (-47,-104)
-les coordonnées correspondent aux centres, en css, on place le côté haut-gauche 
-=> (-82,-139)
-*/
+            /* nb : les coordonnées sont décalées d'un vecteur (-47,-104)
+            les coordonnées correspondent aux centres, en css, on place le côté haut-gauche
+            => (-82,-139)
+            */
 
-});
+        });
 
-</script>
+    </script>
 
 </head>
 
@@ -172,20 +252,24 @@ les coordonnées correspondent aux centres, en css, on place le côté haut-gauc
 
 <h1>Avalam</h1>
 
+<div id="fen">
+FEN :
+</div>
+
 <div id="avalam">
-	<img src="avalam_vide.png" />
+    <img src="avalam_vide.png"/>
 </div>
 
 
 <div id="palette">
-	<div class="jaune col">
-		<img src="jaune.png" />	
-		<div class="nombre"></div>	
-	</div>
-	<div class="rouge col">
-		<img src="rouge.png" />
-		<div class="nombre"></div>
-	</div>
+    <div class="jaune col">
+        <img src="jaune.png"/>
+        <div class="nombre"></div>
+    </div>
+    <div class="rouge col">
+        <img src="rouge.png"/>
+        <div class="nombre"></div>
+    </div>
 </div>
 
 </body>
