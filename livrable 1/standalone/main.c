@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "avalam.h"
-#include "topologie.h"
+#include "../../libavalam-eleves/include/avalam.h"
+#include "../../libavalam-eleves/include/topologie.h"
 /* ***** A Faire
 	reconnaitre la fin de partie et afficher le score
 	paramétrer le nom du data.json
