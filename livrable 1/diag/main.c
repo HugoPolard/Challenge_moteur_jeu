@@ -113,7 +113,6 @@ void interpretation (char * FEN, T_Position* position){
 				ctoi -= 48; // on enlève 48 pour passer du caractère à l'entier
 				ctoi2 -= 48;
 				ctoidiz = ctoi*10 + ctoi2; //on recombine l'unité et la dizaine pour obtenir finalement l'entier consitué des deux caractères dans la chaine FEN
-				printf("%d \n", ctoidiz);
 				temp= j;
 				for(j; j<temp + ctoidiz; j++){
 					(*position).cols[j].nb= 1;
