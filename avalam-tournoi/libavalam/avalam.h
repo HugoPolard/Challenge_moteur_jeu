@@ -91,12 +91,7 @@ T_Position jouerCoup(T_Position p, octet origine, octet destination) ;
 T_ListeCoups getCoupsLegaux(T_Position p) ; 
 T_Score evaluerScore(T_Position p);
 void afficherScore(T_Score s); 
-
-<<<<<<< HEAD:livrable 1/diag/avalam.h
-
 void viderBuffer();
 void crea_fichier(char * filename, T_Position *p, int num_diag, char* description) ;
 void forme_desc(char* description);
 void interpretation(char *,T_Position *position);
-=======
->>>>>>> 04f30d9a74646a91661548dab074976e66f247c1:avalam-tournoi/libavalam/avalam.h

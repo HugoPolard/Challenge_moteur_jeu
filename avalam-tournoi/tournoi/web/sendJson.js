@@ -1,21 +1,13 @@
-<<<<<<< HEAD:livrable 1/standalone/lautre.json
-{
-=======
 traiterJson({
->>>>>>> 04f30d9a74646a91661548dab074976e66f247c1:avalam-tournoi/tournoi/web/sendJson.js
 "trait":1,
 "scoreJ":24,
 "scoreJ5":0,
 "scoreR":22,
 "scoreR5":0,
 "cols":[
-<<<<<<< HEAD:livrable 1/standalone/lautre.json
-	{"nb":3, "couleur":1},
-=======
 	{"nb":1, "couleur":2},
 	{"nb":1, "couleur":1},
 	{"nb":1, "couleur":2},
->>>>>>> 04f30d9a74646a91661548dab074976e66f247c1:avalam-tournoi/tournoi/web/sendJson.js
 	{"nb":1, "couleur":1},
 	{"nb":1, "couleur":2},
 	{"nb":1, "couleur":1},

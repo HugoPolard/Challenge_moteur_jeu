@@ -1,16 +1,8 @@
 #include <stdio.h>
 #include "avalam.h"
 
-<<<<<<< HEAD:livrable 1/standalone/libavalam.c
-<<<<<<< HEAD
 /* Demander l'utilisation exacte de 'extern' dans ce cas */
 extern T_Voisins topologie[NBCASES]; 
-=======
-extern T_Voisins topologie[NBCASES];
->>>>>>> 1b02e2a79229efa6fb29887e73ba42bbe3869aeb
-=======
-extern T_Voisins topologie[NBCASES]; 
->>>>>>> 04f30d9a74646a91661548dab074976e66f247c1:avalam-tournoi/libavalam/libavalam.c
 T_Position positionInitiale; 
 
 octet nbVoisins(octet numCase) {
